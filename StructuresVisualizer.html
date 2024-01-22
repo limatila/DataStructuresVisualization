@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Stacks and Queues</title>
+        <style>
+            body{
+                text-align: center;
+            }
+
+            h1{
+                font-style: italic;
+                font-size: 420%;
+            }
+        
+            button{
+                font-family: Verdana;
+                font-size: larger;
+                border-radius: 0.3rem;
+            }
+        </style>
+    </head>
+    
+    <body>
+        
+        <div id="StackDemo"></div>    
+            <h1>Guia de Navegação</h1>
+            <br><br><br>
+
+            <form onsubmit="return false" spellcheck="false">
+                <input type="text" id="CurrentPageInput" > <br>
+
+                <span id="PreviousPageDisplay">||</span> 
+                <span id="ForwardPagesDisplay">||</span>
+                <br>
+
+                <button id="PreviousPageBtn" onclick="historico.voltar()">◀ Anterior</button> <span></span>
+                <button id="ForwardPageBtn" onclick="historico.prosseguir()">Próximo ▶</button>
+            </form>
+        </div>
+        <script src="stack.js"></script>
+        
+        <br><br><br><br><br>
+
+        <div id="QueueDemo"></div>    
+            <h1>Fila</h1>
+            <br><br><br>
+            
+            <button id="PreviousPageBtn"></button>
+            <button id="ForwardPageBtn"></button>
+        </div>
+        <script src="queue.js"></script>
+        
+    </body>
+</html>
