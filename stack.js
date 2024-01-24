@@ -7,19 +7,19 @@ console.log("Historico Importado.")
 //Uma pilha só pode sofrer alterações no último elemento
 //Pode ser checado qual o tamanho da pilha
 class Stack{ 
-    constructor(descricao = null, maxPilha){
+    constructor(descricao = null, maxPilha = 5){
         console.log("Pilha Criada.")
 
-        this.armazenamento = [null]
-        this.maxPilha = maxPilha || 5 //pode ser especificado
+        this.armazenamento = []
+        this.maxPilha = maxPilha //pode ser especificado
         this.descricao = descricao
     }
 
-    set setMaxPilha(novoMax){
+    set novoMax(novoMax){
         this.maxPilha = novoMax
     }
 
-    set setDescricao(novaDesc){
+    set novaDesc(novaDesc){
         this.descricao = novaDesc.toString()
     }
 
@@ -34,9 +34,15 @@ class Stack{
     adicionar(novoLink){
         this.armazenamento.push(novoLink)
     }
+    
+    fechar(){
+        console.warn("Pilha Deletada!")
+        delete this
+    }
 }
 
-const Pilha_Anteriores = new Stack();
+const Pilha_Anteriores = new Stack(10);
+Pilha_Anteriores.maxPilha = 10
 const Pilha_Proximos = new Stack();
 
 class historyManagement{
@@ -66,6 +72,7 @@ class historyManagement{
         //puxa do input para a pilha1
         Pilha_Anteriores.adicionar(inputPaginaAtual.value)
 
+        //mostra display
         this.atualizarDisplayPilha()
 
         //deixa input com o próximo
@@ -82,11 +89,17 @@ class historyManagement{
         //puxa do input pros proximos
         Pilha_Proximos.adicionar(inputPaginaAtual.value)
         
+        //mostra display
+        this.atualizarDisplayPilha()
+        
         //puxa do anterior pro input
         inputPaginaAtual.value = Pilha_Anteriores.remover()
     }
 
-
+    fechar(){
+            console.warn("Pilha Deletada!")
+            delete this
+        }
 }
 
 historico = new historyManagement()
