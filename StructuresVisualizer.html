@@ -15,7 +15,24 @@
                 font-family: Verdana;
                 font-size: larger;
                 border-radius: 0.3rem;
+                margin-right: 1%;
+                margin-left: 1%;
             }
+
+            .pageSelector{
+                text-align: var();
+                margin-right: 1%;
+                margin-left: 1%;
+            }
+            .displayContainer{
+                border: 3px solid #000;
+                padding: 20px;;
+            }
+
+            #PreviousPagesDisplay, ForwardPagesDisplay{
+                font-size: large;
+            }
+            
         </style>
         <script src="stack.js" defer></script>
         <script src="queue.js" defer></script>
@@ -29,13 +46,17 @@
 
             <form onsubmit="return false" spellcheck="false">
                 <input type="text" id="CurrentPageInput" > <br>
-
-                <span id="PreviousPagesDisplay">||</span> 
-                <span id="ForwardPagesDisplay">||</span>
-                <br>
-
-                <button id="PreviousPageBtn" onclick="historico.voltar()">◀ Anterior</button> <span></span>
-                <button id="ForwardPageBtn" onclick="historico.prosseguir()">Próximo ▶</button>
+                
+                <div id="displayContainer"></div>
+                    <div class="pageSelector">
+                        <span id="PreviousPagesDisplay">||</span> 
+                        <button id="PreviousPageBtn" onclick="historico.voltar()">◀ Anterior</button> 
+                    </div>
+                    <div class="pageSelector">
+                        <span id="ForwardPagesDisplay">||</span>
+                        <button id="ForwardPageBtn" onclick="historico.prosseguir()">Próximo ▶</button>
+                    </div>
+            
             </form>
         </div>
         
