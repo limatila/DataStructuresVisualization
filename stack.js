@@ -7,7 +7,7 @@ console.log("Historico Importado.")
 //Uma pilha só pode sofrer alterações no último elemento
 //Pode ser checado qual o tamanho da pilha
 class Stack{ 
-    constructor(descricao = null, maxPilha = 5){
+    constructor(descricao = "", maxPilha = 5){
         console.log("Pilha Criada.")
 
         this.armazenamento = []
@@ -30,6 +30,11 @@ class Stack{
     remover(){
         return this.armazenamento.pop()
     }
+    
+    esvaziarPilha(){
+        this.armazenamento = []
+        console.warn("Pilha vazia!")
+    }
 
     adicionar(novoLink){
         this.armazenamento.push(novoLink)
@@ -41,9 +46,11 @@ class Stack{
     }
 }
 
-const Pilha_Anteriores = new Stack(10);
-Pilha_Anteriores.maxPilha = 10
+const Pilha_Anteriores = new Stack();
+Pilha_Anteriores.novoMax = 10
+Pilha_Anteriores.novaDesc = "Pilha dos sites visitados anteriormente"
 const Pilha_Proximos = new Stack();
+Pilha_Proximos.novaDesc = "Pilha de sites que foram exibidos antes de usar o botão de retorno"
 
 class historyManagement{
     constructor(){
@@ -51,8 +58,16 @@ class historyManagement{
     }
 
     atualizarDisplayPilha(){
-        displayAnteriores.textContent = Pilha_Anteriores.armazenamento
-        displayProximos.textContent = Pilha_Proximos.armazenamento
+        //TODO: criar elemento pra cada elemento de cada pilha
+        arrayPilhas = [Pilha_Anteriores, Pilha_Proximos]
+        arrayPilhas.forEach((pilha) => {
+            i = pilha.armazenamento.length
+            while(i <= 0){
+                linkEl = document.createElement("a")
+                linkEl.href = pilha.armazenamento[0]
+                linkEl.textContent = linkEl.href
+            }
+        }
     }
 
     checarInputVazio(){
@@ -69,14 +84,14 @@ class historyManagement{
             throw console.error("Pilha cheia, ignorando...")
         }
 
-        //puxa do input para a pilha1
+        //input -> anteriores
         Pilha_Anteriores.adicionar(inputPaginaAtual.value)
 
+        //proximos -> input
+        inputPaginaAtual.value = Pilha_Proximos.remover()
+        
         //mostra display
         this.atualizarDisplayPilha()
-
-        //deixa input com o próximo
-        inputPaginaAtual.value = Pilha_Proximos.remover()
     }
 
     voltar(){
@@ -85,15 +100,15 @@ class historyManagement{
             alert("pilha dos proximos cheia!")
             throw console.error("Pilha cheia, ignorando...")
         }
-
-        //puxa do input pros proximos
+        
+        
+        //input -> proximos
         Pilha_Proximos.adicionar(inputPaginaAtual.value)
         
-        //mostra display
-        this.atualizarDisplayPilha()
-        
-        //puxa do anterior pro input
+        //anteriores -> input
         inputPaginaAtual.value = Pilha_Anteriores.remover()
+        
+        this.atualizarDisplayPilha()
     }
 
     fechar(){
