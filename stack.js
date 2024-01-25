@@ -13,6 +13,7 @@ class Stack{
         this.armazenamento = []
         this.maxPilha = maxPilha //pode ser especificado
         this.descricao = descricao
+        this.divAfiliada = ""
     }
 
     set novoMax(novoMax){
@@ -21,6 +22,11 @@ class Stack{
 
     set novaDesc(novaDesc){
         this.descricao = novaDesc.toString()
+    }
+
+    //use somente IDs de DIVs
+    set novaDiv(novaDiv){
+        this.divAfiliada = document.getElementById(novaDiv.toString())
     }
 
     cheia(){
@@ -40,7 +46,7 @@ class Stack{
         this.armazenamento.push(novoLink)
     }
     
-    fechar(){
+    fechar(){ //! não funcionando
         console.warn("Pilha Deletada!")
         delete this
     }
@@ -48,8 +54,11 @@ class Stack{
 
 const Pilha_Anteriores = new Stack();
 Pilha_Anteriores.novoMax = 10
+Pilha_Anteriores.novaDiv = "PreviousDiv"
 Pilha_Anteriores.novaDesc = "Pilha dos sites visitados anteriormente"
+
 const Pilha_Proximos = new Stack();
+Pilha_Anteriores.novaDiv = "ForwardDiv"
 Pilha_Proximos.novaDesc = "Pilha de sites que foram exibidos antes de usar o botão de retorno"
 
 class historyManagement{
@@ -58,27 +67,30 @@ class historyManagement{
     }
 
     atualizarDisplayPilha(){
-        //TODO: criar elemento pra cada elemento de cada pilha
         arrayPilhas = [Pilha_Anteriores, Pilha_Proximos]
-        arrayPilhas.forEach((pilha) => {
+        arrayPilhas.forEach( (pilha) => {
             i = pilha.armazenamento.length
             while(i <= 0){
                 linkEl = document.createElement("a")
                 linkEl.href = pilha.armazenamento[0]
                 linkEl.textContent = linkEl.href
-            }
-        }
+                
+                //adicionando ao display
+                pilha.divAfiliada.appendChild(linkEl)
+            } 
+        }) 
     }
 
-    checarInputVazio(){
-        if(inputPaginaAtual.length == 0){
+    checarInputVazio(){ //! não funcionando
+        if(inputPaginaAtual.length === 0 || inputPaginaAtual === null || undefined){
             alert("insira um link")
             throw console.error("Input sem valor")
         }
     }
 
+    //* prosseguir e voltar funcionam no back, mas não atualizam o front
     prosseguir(){
-        this.checarInputVazio()
+        this.checarInputVazio() //!
         if(Pilha_Anteriores.cheia() === true){
             alert("pilha dos anteriores cheia!")
             throw console.error("Pilha cheia, ignorando...")
@@ -95,7 +107,7 @@ class historyManagement{
     }
 
     voltar(){
-        this.checarInputVazio()
+        this.checarInputVazio() //!
         if(Pilha_Proximos.cheia() === true){
             alert("pilha dos proximos cheia!")
             throw console.error("Pilha cheia, ignorando...")
@@ -111,10 +123,19 @@ class historyManagement{
         this.atualizarDisplayPilha()
     }
 
-    fechar(){
+    esvaziarDisplay(){
+        Pilha_Anteriores.esvaziarPilha()
+        Pilha_Proximos.esvaziarPilha()
+        this.atualizarDisplayPilha()
+    }
+
+    fechar(){ //! não funcionando
             console.warn("Pilha Deletada!")
+            Pilha_Anteriores.fechar() //!
+            Pilha_Proximos.fechar() //!
             delete this
-        }
+    }
+
 }
 
 historico = new historyManagement()
