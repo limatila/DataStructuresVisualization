@@ -78,7 +78,7 @@ class historyManagement{
         let i = 0
         while(i < this.arrayHistoricos.length){
             let j = this.arrayHistoricos[i].armazenamento.length //! não está sendo lido
-            divParaAdd = this.arrayHistoricos[i].
+            divParaAdd = this.arrayHistoricos[i].divAfiliada
             
             while(j >= 0){ //adicionando ao display
                 linkEl = document.createElement("a")
