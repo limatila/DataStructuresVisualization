@@ -8,7 +8,8 @@
 
             h1{
                 font-style: italic;
-                font-size: 420%;
+                font-size: 4rem;
+                margin: 0px;
             }
         
             button{
@@ -19,35 +20,40 @@
                 margin-left: 1%;
             }
 
-            .pageSelector{
-                text-align: var();
-                margin-right: 1%;
-                margin-left: 1%;
-            }
-            .displayContainer{
-                border: 3px solid #000;
-                padding: 50px;;
+            :placeholder-shown{
+                opacity: 50%;
             }
 
-            .pageSelector{
-                font-size: medium;
+            .displayPageContainer{
+                border: 3px solid rgb(172, 171, 171);
+                width: 20rem;
+                padding: 1rem;
+                margin: auto; /* porque a largura foi especificada, a margem deve existir */
+                margin-bottom: 0px;
             }
-            
+            .pageSelector{ /*TODO colocar lado a lado */
+                font-size: small;
+                display: inline-block; 
+                margin-right: 1%;
+                margin-left: 1%;
+                padding: 2%;
+                border: 2px solid rgb(255, 15, 0, 100)
+            }
+
         </style>
         <script src="stack.js" defer></script>
-        <script src="queue.js" defer></script>
+        <!-- <script src="queue.js" defer></script> -->
     </head>
     
     <body>
         
         <div id="StackDemo"></div>    
             <h1>Guia de Navegação</h1>
-            <br><br><br>
-
-            <form onsubmit="return false" spellcheck="false">
-                <input type="text" id="CurrentPageInput" > <br>
-                
-                <div id="displayContainer"></div>
+            <br>
+            <div class="displayPageContainer">
+                <form onsubmit="return false" spellcheck="false" style="margin-bottom: 0px;">
+                    <input type="text" id="CurrentPageInput" placeholder="Type an url..." draggable="false" size="26"> <br><br>
+                    
                     <div class="pageSelector" id="ForwardDiv">
                         <span id="PreviousPagesDisplay">||</span> 
                         <button id="PreviousPageBtn" onclick="historico.voltar()">
@@ -55,11 +61,13 @@
                     </div>
                     <div class="pageSelector" id="PreviousDiv">
                         <span id="ForwardPagesDisplay">||</span>
+                        
                         <button id="ForwardPageBtn" onclick="historico.prosseguir()">
                             Próximo ▶</button>
                     </div>
-            
-            </form>
+
+                </form>
+            </div>
         </div>
         
         <br><br><br><br><br>
@@ -67,7 +75,7 @@
         <div id="QueueDemo"></div>    
             <h1>Fila</h1>
             <br><br><br>
-            
+            <div class="displayPageContainer"></div>
             <button id=""></button>
             <button id=""></button>
         </div>
