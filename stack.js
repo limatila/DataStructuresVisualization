@@ -69,9 +69,9 @@ Pilha_Anteriores.adicionar("https://youtube.com"); Pilha_Anteriores.adicionar("h
 Pilha_Proximos.adicionar("https://www.google.com/search?q=pokemon+591") //*hihi
 
 class historyManagement{
-    constructor(){
+    constructor(arrayHistoricosInserido){
         console.log("Manejador de histórico Criado.")
-        this.arrayHistoricos = [Pilha_Anteriores, Pilha_Proximos]
+        this.arrayHistoricos = [...arrayHistoricosInserido]
     }
 
     atualizarDisplayPilha = () => {
@@ -150,5 +150,5 @@ class historyManagement{
 
 }
 
-historico = new historyManagement()
+historico = new historyManagement( [Pilha_Proximos, Pilha_Anteriores] )
 historico.atualizarDisplayPilha()
