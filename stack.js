@@ -51,42 +51,55 @@ class Stack{
     }
 }
 
-const Pilha_Anteriores = new Stack();
+Pilha_Anteriores = new Stack();
 Pilha_Anteriores.novoMax = 10
-Pilha_Anteriores.novaDiv = "PreviousDiv"
+Pilha_Anteriores.novaDiv = "PreviousDivDisplay"
 Pilha_Anteriores.novaDesc = "Pilha dos sites visitados anteriormente"
 
-const Pilha_Proximos = new Stack();
-Pilha_Proximos.novaDiv = "ForwardDiv"
+Pilha_Proximos = new Stack();
+Pilha_Proximos.novaDiv = "ForwardDivDisplay"
 Pilha_Proximos.novaDesc = "Pilha de sites que foram exibidos antes de usar o botão de retorno"
 
 Pilha_Anteriores.adicionar("https://youtube.com"); Pilha_Anteriores.adicionar("https://github.com/limatila/")
 Pilha_Proximos.adicionar("https://www.google.com/search?q=pokemon+591") //*hihi
 
+//Manejador de histórico, responsável por chamar métodos das pilhas e atualizar o display
 class historyManagement{
     constructor(arrayHistoricosInserido){
         console.log("Manejador de histórico Criado.")
         this.arrayHistoricos = [...arrayHistoricosInserido]
     }
 
-    atualizarDisplayPilha = () => {
-        let i = 0
-        while(i < this.arrayHistoricos.length){
-            let j = this.arrayHistoricos[i].armazenamento.length //! não está sendo lido
-            divParaAdd = this.arrayHistoricos[i].divAfiliada
-            
-            while(j >= 0){ //adicionando ao display
-                linkEl = document.createElement("a")
-                linkEl.href = this.arrayHistoricos.armazenamento[j]
-                linkEl.textContent = linkEl.href
-                
-                
-                divParaAdd.appendChild(linkEl)
-                j++
-            }
+    atualizarDisplayPilha(){ //? ainda não foi possível construir para atualizar todas as pilhas disponíveis no momento da execução
+        let divParaAdd_one = document.getElementById("ForwardDivDisplay")
+        let divParaAdd_two = document.getElementById("PreviousDivDisplay")
+        //apagando
+        divParaAdd_one.innerHTML = "" 
+        divParaAdd_two.innerHTML = ""
+        
+        let i = (this.arrayHistoricos[0].armazenamento.length) - 1
 
-            i++
-        } 
+        while(i >= 0){
+            let linkElement = document.createElement("a")
+            linkElement.href = this.arrayHistoricos[0].armazenamento[i]
+            linkElement.innerText = linkElement.href + "\n"
+            
+            divParaAdd_one.appendChild(linkElement)
+
+            i--
+        }
+
+        
+        i = (this.arrayHistoricos[1].armazenamento.length) - 1
+        while(i >= 0){
+            let linkElement = document.createElement("a")
+            linkElement.href = this.arrayHistoricos[0].armazenamento[i]
+            linkElement.innerText = linkElement.href + "\n"
+            
+            divParaAdd_two.appendChild(linkElement)
+
+            i--
+        }
     }
 
     checarInputVazio(){ //! não funcionando
@@ -139,5 +152,5 @@ class historyManagement{
     }
 }
 
-historico = new historyManagement( [Pilha_Proximos, Pilha_Anteriores] )
+historico = new historyManagement( [Pilha_Anteriores, Pilha_Proximos] )
 historico.atualizarDisplayPilha()

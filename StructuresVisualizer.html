@@ -14,10 +14,11 @@
         
             button{
                 font-family: Verdana;
-                font-size: larger;
+                font-size: medium;
                 border-radius: 0.3rem;
                 margin-right: 1%;
                 margin-left: 1%;
+                white-space: nowrap;
             }
 
             :placeholder-shown{
@@ -27,17 +28,20 @@
             .displayPageContainer{
                 border: 3px solid rgb(172, 171, 171);
                 width: 20rem;
-                padding: 1rem;
+                padding: 3.4rem;
                 margin: auto; /* porque a largura foi especificada, a margem deve existir */
                 margin-bottom: 0px;
+                box-shadow: 0px 0px 10px black;
             }
             .pageSelector{ /*TODO colocar lado a lado */
-                font-size: small;
+                font-size: medium;
+                white-space: nowrap;
                 display: inline-block; 
                 margin-right: 1%;
                 margin-left: 1%;
-                padding: 2%;
-                border: 2px solid rgb(255, 15, 0, 100)
+                padding: 5%;
+                box-shadow: 0px 6px 10px black;
+                border: 2px solid rgb(25, 194, 166)
             }
 
         </style>
@@ -52,16 +56,21 @@
             <br>
             <div class="displayPageContainer">
                 <form onsubmit="return false" spellcheck="false" style="margin-bottom: 0px;">
-                    <input type="text" id="CurrentPageInput" placeholder="Type an url..." draggable="false" size="26"> <br><br>
+                    <input type="text" id="CurrentPageInput" placeholder="Type an url..." draggable="false" size="26"> 
+                    <input type="submit" onclick="" value="Ir">
+                    <br><br>
                     
-                    <div class="pageSelector" id="ForwardDiv">
-                        <span id="PreviousPagesDisplay">||</span> 
+                    <div class="pageSelector" id="PreviousDiv">
+                        <div id="PreviousDivDisplay">
+                            
+                        </div>
                         <button id="PreviousPageBtn" onclick="historico.voltar()">
                             ◀ Anterior</button> 
-                    </div>
-                    <div class="pageSelector" id="PreviousDiv">
-                        <span id="ForwardPagesDisplay">||</span>
-                        
+                    </div> 
+                    <div class="pageSelector" id="ForwardDiv">
+                        <div id="ForwardDivDisplay">
+                            
+                        </div>
                         <button id="ForwardPageBtn" onclick="historico.prosseguir()">
                             Próximo ▶</button>
                     </div>
@@ -75,7 +84,7 @@
         <div id="QueueDemo"></div>    
             <h1>Fila</h1>
             <br><br><br>
-            <div class="displayPageContainer"></div>
+            <div class=""></div>
             <button id=""></button>
             <button id=""></button>
         </div>
