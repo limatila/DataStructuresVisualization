@@ -49,11 +49,6 @@ class Stack{
     adicionar(novoLink){
         this.armazenamento.push(novoLink.toString())
     }
-    
-    fechar(){ //! não funcionando
-        console.warn("Pilha Deletada!")
-        delete this
-    }
 }
 
 const Pilha_Anteriores = new Stack();
@@ -138,16 +133,10 @@ class historyManagement{
     esvaziarDisplay(){
         Pilha_Anteriores.esvaziarPilha()
         Pilha_Proximos.esvaziarPilha()
+        inputPaginaAtual.value = null
+        
         this.atualizarDisplayPilha()
     }
-
-    fechar(){ //! não funcionando
-            console.warn("Pilha Deletada!")
-            Pilha_Anteriores.fechar() //!
-            Pilha_Proximos.fechar() //!
-            delete this
-    }
-
 }
 
 historico = new historyManagement( [Pilha_Proximos, Pilha_Anteriores] )
