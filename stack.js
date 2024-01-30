@@ -57,6 +57,7 @@ Pilha_Anteriores.novaDiv = "PreviousDivDisplay"
 Pilha_Anteriores.novaDesc = "Pilha dos sites visitados anteriormente"
 
 Pilha_Proximos = new Stack();
+Pilha_Proximos.novoMax = 10
 Pilha_Proximos.novaDiv = "ForwardDivDisplay"
 Pilha_Proximos.novaDesc = "Pilha de sites que foram exibidos antes de usar o botão de retorno"
 
@@ -71,14 +72,13 @@ class historyManagement{
     }
 
     atualizarDisplayPilha(){ //? ainda não foi possível construir para atualizar todas as pilhas disponíveis no momento da execução
-        let divParaAdd_one = document.getElementById("ForwardDivDisplay")
-        let divParaAdd_two = document.getElementById("PreviousDivDisplay")
+        let divParaAdd_one = document.getElementById("PreviousDivDisplay")
+        let divParaAdd_two = document.getElementById("ForwardDivDisplay")
         //apagando
         divParaAdd_one.innerHTML = "" 
         divParaAdd_two.innerHTML = ""
         
         let i = (this.arrayHistoricos[0].armazenamento.length) - 1
-
         while(i >= 0){
             let linkElement = document.createElement("a")
             linkElement.href = this.arrayHistoricos[0].armazenamento[i]
@@ -113,8 +113,8 @@ class historyManagement{
     prosseguir(){
         this.checarInputVazio() //!
         if(Pilha_Anteriores.cheia() === true){
-            alert("pilha dos anteriores cheia!")
-            throw console.error("Pilha cheia, ignorando...")
+            alert("Pilha dos anteriores cheia!\nRemovendo último elemento...")
+            Pilha_Anteriores.remover()
         }
 
         //input -> anteriores
@@ -130,8 +130,8 @@ class historyManagement{
     voltar(){
         this.checarInputVazio() //!
         if(Pilha_Proximos.cheia() === true){
-            alert("pilha dos proximos cheia!")
-            throw console.error("Pilha cheia, ignorando...")
+            alert("Pilha dos proximos cheia!\nRemovendo último elemento...")
+            Pilha_Proximos.remover()
         }
         
         //input -> proximos
