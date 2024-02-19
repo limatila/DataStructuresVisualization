@@ -6,7 +6,7 @@ console.log("Historico Importado.")
 
 //Uma pilha só pode sofrer alterações no último elemento
 //Depois das transferências o historico deve ser alterado visualmente
-class Stack{ 
+class Stack{ //! Estabelecer melhor encapsulamento. Vars privadas, Metodos privados, atualizarDisplayPilha(), transferir toda a carga da pilha APENAS para ela mesma, e retornar para o histórico.
     constructor(descricao = "", maxPilha = 5){
         console.log("Pilha Criada.")
 
